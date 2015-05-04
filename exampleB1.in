@@ -1,0 +1,19 @@
+# Macro file for example B1 test
+
+/run/initialize
+
+/hits/activate sdetector
+
+#/gps/pos/type Plane
+#/gps/pos/shape Circle
+#/gps/pos/radius 3 mm
+/gps/ang/type beam1d
+/gps/direction 0 0 1
+/control/execute sr90.in
+
+#
+#/run/verbose 1
+#/event/verbose 1
+#/tracking/verbose 1
+/run/printProgress 10
+/run/beamOn 10000
