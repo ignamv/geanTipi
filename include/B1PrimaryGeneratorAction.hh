@@ -46,19 +46,19 @@ class G4Box;
 
 class B1PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  public:
-    B1PrimaryGeneratorAction();    
-    virtual ~B1PrimaryGeneratorAction();
+    public:
+        B1PrimaryGeneratorAction();    
+        virtual ~B1PrimaryGeneratorAction();
 
-    // method from the base class
-    virtual void GeneratePrimaries(G4Event*);         
-  
-    // method to access particle gun
-    G4GeneralParticleSource* GetParticleGun() { return fParticleGun; }
-  
-  private:
-    G4GeneralParticleSource*  fParticleGun; // pointer a to G4 gun class
-    G4Box* fEnvelopeBox;
+        // method from the base class
+        virtual void GeneratePrimaries(G4Event*);         
+
+        // method to access particle gun
+        G4GeneralParticleSource* GetParticleGun() { return fParticleGun; }
+
+    private:
+        G4GeneralParticleSource*  fParticleGun; // pointer a to G4 gun class
+        G4Box* fEnvelopeBox;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

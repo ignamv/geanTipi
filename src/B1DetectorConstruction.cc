@@ -44,7 +44,7 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1DetectorConstruction::B1DetectorConstruction()
+    B1DetectorConstruction::B1DetectorConstruction()
 : G4VUserDetectorConstruction(),
     fScoringVolume(0)
 { }
@@ -104,14 +104,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
     //G4VPhysicalVolume *= new G4PVPlacement(
     new G4PVPlacement(
-        0,
-        G4ThreeVector(0, 0, 200*mm),
-        mano,
-        "mano",
-        logicWorld,
-        false,
-        0,
-        checkOverlaps);
+            0,
+            G4ThreeVector(0, 0, 200*mm),
+            mano,
+            "mano",
+            logicWorld,
+            false,
+            0,
+            checkOverlaps);
     // Set Shape2 as scoring volume
     //
     fScoringVolume = mano;

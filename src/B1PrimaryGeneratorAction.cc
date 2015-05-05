@@ -42,27 +42,27 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
+    B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0), 
-  fEnvelopeBox(0)
+    fParticleGun(0), 
+    fEnvelopeBox(0)
 {
-  fParticleGun  = new G4GeneralParticleSource();
-  fParticleGun->SetParticleDefinition(G4Electron::Definition());
+    fParticleGun  = new G4GeneralParticleSource();
+    fParticleGun->SetParticleDefinition(G4Electron::Definition());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B1PrimaryGeneratorAction::~B1PrimaryGeneratorAction()
 {
-  delete fParticleGun;
+    delete fParticleGun;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  fParticleGun->GeneratePrimaryVertex(anEvent);
+    fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
