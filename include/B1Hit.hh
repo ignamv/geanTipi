@@ -12,7 +12,11 @@ class B1Hit : public G4VHit
             energy(_energy),
             position(_position) {}
         void Print() { 
-            G4cout << "Hit@\t" << energy << "\t" << position.z() << G4endl; 
+            G4cout << "Hit@\t" << energy 
+                << "\t" << position.x() 
+                << "\t" << position.y() 
+                << "\t" << position.z() 
+                << G4endl; 
         } 
         G4double energy;
         G4ThreeVector position;
