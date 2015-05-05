@@ -44,6 +44,7 @@ target_link_libraries(exampleB1 ${Geant4_LIBRARIES})
 # relies on these scripts being in the current working directory.
 #
 set(EXAMPLEB1_SCRIPTS
+  fcstd2gdml.py
   exampleB1.in
   sr90.in
   )
