@@ -44,9 +44,11 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    B1DetectorConstruction::B1DetectorConstruction()
+    B1DetectorConstruction::B1DetectorConstruction(G4VPhysicalVolume *setWorld)
 : G4VUserDetectorConstruction(),
+    world(setWorld),
     fScoringVolume(0)
+
 { }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -58,74 +60,13 @@ B1DetectorConstruction::~B1DetectorConstruction()
 
 G4VPhysicalVolume* B1DetectorConstruction::Construct()
 {  
-    // Get nist material manager
-    G4NistManager* nist = G4NistManager::Instance();
-
-    // Option to switch on/off checking of volumes overlaps
-    G4bool checkOverlaps = true;
-
-    //     
-    // World
-    //
-    G4double world_sizeXY = 100 * cm;
-    G4double world_sizeZ  = 100 * cm;
-    G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
-
-    G4Box* solidWorld =    
-        new G4Box("World",                       //its name
-                0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);     //its size
-
-    G4LogicalVolume* logicWorld =                         
-        new G4LogicalVolume(solidWorld,          //its solid
-                world_mat,           //its material
-                "World");            //its name
-
-    G4VPhysicalVolume* physWorld = 
-        new G4PVPlacement(0,                     //no rotation
-                G4ThreeVector(),       //at (0,0,0)
-                logicWorld,            //its logical volume
-                "World",               //its name
-                0,                     //its mother  volume
-                false,                 //no boolean operation
-                0,                     //copy number
-                checkOverlaps);        //overlaps checking
-
-    //     
-    // Mano
-    //  
-    G4Material* tissue = nist->FindOrBuildMaterial("G4_A-150_TISSUE");
-    G4ThreeVector pos1 = G4ThreeVector(0, 0, 20*cm);
-
-    G4Box *solidmano= new G4Box("solidmano", 50.0*mm, 100.0*mm, 10.0*mm );
-    G4LogicalVolume * mano = new G4LogicalVolume(solidmano,      //its solid
-            tissue,         //its material
-            "mano" ,         //its name
-            0,0,0);
-
-    //G4VPhysicalVolume *= new G4PVPlacement(
-    new G4PVPlacement(
-            0,
-            G4ThreeVector(0, 0, 200*mm),
-            mano,
-            "mano",
-            logicWorld,
-            false,
-            0,
-            checkOverlaps);
-    // Set Shape2 as scoring volume
-    //
-    fScoringVolume = mano;
-
-    //
-    //always return the physical World
-    //
-    return physWorld;
+    return world;
 }
 
 void B1DetectorConstruction::ConstructSDandField()
 {
     B1SensitiveDetector *sdetector = new B1SensitiveDetector("sdetector");
-    SetSensitiveDetector("mano", sdetector, false);
+    SetSensitiveDetector("detectorLogical", sdetector, false);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
