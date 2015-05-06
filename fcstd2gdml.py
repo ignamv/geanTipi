@@ -46,7 +46,7 @@ for obj in fcstd.Objects:
 
 # Fix placements
 for obj in fcstd.Objects:
-    if obj.TypeId == 'Part::Cylinder':
+    if obj.TypeId in ['Part::Cylinder', 'Part::Cone']:
         # FreeCAD placement is center of bottom face
         # GDML position is center
         delta = FreeCAD.Vector(0, 0, obj.Height.Value / 2)
@@ -73,6 +73,20 @@ for obj in fcstd.Objects:
             'name': name, 'rmax': str(obj.Radius.Value), 
             'deltaphi': str(float(obj.Angle)), 'aunit': 'deg',
             'z': str(obj.Height.Value),
+            'lunit': 'mm'})
+    elif obj.TypeId == 'Part::Cone':
+        ET.SubElement(solids, 'cone', {
+            'name': name, 'rmax1': str(obj.Radius1.Value), 
+            'rmax2': str(obj.Radius2.Value), 
+            'deltaphi': str(float(obj.Angle)), 'aunit': 'deg',
+            'z': str(obj.Height.Value),
+            'lunit': 'mm'})
+    elif obj.TypeId == 'Part::Sphere':
+        ET.SubElement(solids, 'sphere', {
+            'name': name, 'rmax': str(obj.Radius.Value), 
+            'starttheta': str(90.-float(obj.Angle2)), 'aunit': 'deg',
+            'deltatheta': str(float(obj.Angle2-obj.Angle1)),
+            'deltaphi': str(float(obj.Angle3)),
             'lunit': 'mm'})
     elif obj.TypeId == 'Part::Box':
         ET.SubElement(solids, 'box', {
