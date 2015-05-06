@@ -30,6 +30,7 @@
 
 #include "B1ActionInitialization.hh"
 #include "B1PrimaryGeneratorAction.hh"
+#include "RunAction.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -46,9 +47,8 @@ B1ActionInitialization::~B1ActionInitialization()
 
 void B1ActionInitialization::Build() const
 {
+    SetUserAction(new RunAction);
     SetUserAction(new B1PrimaryGeneratorAction);
-
-
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

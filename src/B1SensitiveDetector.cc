@@ -2,6 +2,8 @@
 #include "B1SensitiveDetector.hh"
 #include "B1Hit.hh"
 #include "G4SDManager.hh"
+#include "Analysis.hh"
+#include <vector>
 
     B1SensitiveDetector::B1SensitiveDetector(G4String name)
 : G4VSensitiveDetector(name)
@@ -32,8 +34,19 @@ G4bool B1SensitiveDetector::ProcessHits(G4Step *step,
 
 void B1SensitiveDetector::EndOfEvent(G4HCofThisEvent *)
 {
-    if ( true ) { //verboseLevel>1 ) {
-        G4int nofHits = fHitsCollection->entries();
-        for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
-    }
+  G4int nofHits = fHitsCollection->entries();
+  if (nofHits == 0)
+  {
+      return;
+  }
+  G4AnalysisManager* man = G4AnalysisManager::Instance();
+  std::vector<B1Hit*> *vec = fHitsCollection->GetVector();
+  for ( std::vector<B1Hit*>::iterator it = vec->begin(); it != vec->end(); it++)
+  {
+      man->FillNtupleDColumn(0, (*it)->energy);
+      man->FillNtupleDColumn(1, (*it)->position[0]);
+      man->FillNtupleDColumn(2, (*it)->position[1]);
+      man->FillNtupleDColumn(3, (*it)->position[2]);
+      man->AddNtupleRow(); 
+  }
 }
