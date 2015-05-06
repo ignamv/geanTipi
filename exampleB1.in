@@ -8,13 +8,13 @@
 /gps/pos/type Plane
 /gps/pos/shape Circle
 /gps/pos/radius 3 mm
-#/gps/ang/type beam1d
-#/gps/direction 0 0 1
+/gps/ang/type beam1d
+/gps/direction 0 0 1
 /control/execute sr90.in
 
 #
 #/run/verbose 1
 #/event/verbose 1
 #/tracking/verbose 1
-/run/printProgress 100000
-/run/beamOn 1000000
+/run/printProgress 100
+/run/beamOn 1000
