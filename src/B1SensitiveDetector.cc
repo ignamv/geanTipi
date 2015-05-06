@@ -36,4 +36,4 @@ void B1SensitiveDetector::EndOfEvent(G4HCofThisEvent *)
         G4int nofHits = fHitsCollection->entries();
         for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
     }
-    }
+}
