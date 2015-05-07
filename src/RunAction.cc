@@ -1,5 +1,7 @@
+#include "G4Run.hh"
 #include "RunAction.hh"
 #include "Analysis.hh"
+#include <string>
 
 RunAction::RunAction()
 {
@@ -19,9 +21,14 @@ RunAction::~RunAction()
     delete G4AnalysisManager::Instance();  
 }
 
-void RunAction::BeginOfRunAction(const G4Run* )
+void RunAction::BeginOfRunAction(const G4Run* run)
 {
-    G4AnalysisManager::Instance()->OpenFile("File");
+    std::ostringstream filename;
+    filename << "Run";
+    filename.fill('0');
+    filename.width(6);
+    filename << run->GetRunID();
+    G4AnalysisManager::Instance()->OpenFile(filename.str());
 }
 
 void RunAction::EndOfRunAction(const G4Run* )
