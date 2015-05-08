@@ -40,13 +40,12 @@ void B1SensitiveDetector::EndOfEvent(G4HCofThisEvent *)
       return;
   }
   G4AnalysisManager* man = G4AnalysisManager::Instance();
-  std::vector<B1Hit*> *vec = fHitsCollection->GetVector();
-  for ( std::vector<B1Hit*>::iterator it = vec->begin(); it != vec->end(); it++)
+  for ( auto hit : *fHitsCollection->GetVector())
   {
-      man->FillNtupleDColumn(0, (*it)->energy);
-      man->FillNtupleDColumn(1, (*it)->position[0]);
-      man->FillNtupleDColumn(2, (*it)->position[1]);
-      man->FillNtupleDColumn(3, (*it)->position[2]);
+      man->FillNtupleDColumn(0, hit->energy);
+      man->FillNtupleDColumn(1, hit->position[0]);
+      man->FillNtupleDColumn(2, hit->position[1]);
+      man->FillNtupleDColumn(3, hit->position[2]);
       man->AddNtupleRow(); 
   }
 }
