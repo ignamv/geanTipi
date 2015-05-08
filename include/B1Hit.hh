@@ -9,15 +9,18 @@
 class B1Hit : public G4VHit
 {
     public:
-        B1Hit(G4double _energy, G4ThreeVector _position):
+        B1Hit(G4double _energy, G4ThreeVector _position, G4double _weight):
             energy(_energy),
-            position(_position) {}
+            position(_position),
+            weight(_weight) {}
         void Print() 
         { 
-            G4cout << "Hit@\t" << energy << "\t" << position << G4endl; 
+            G4cout << "Hit@\t" << energy << "\t" << position 
+                << "\tWeight " << weight << G4endl; 
         } 
         G4double energy;
         G4ThreeVector position;
+        G4double weight;
 
         inline void * operator new(size_t);
         inline void operator delete(void *aHit);
