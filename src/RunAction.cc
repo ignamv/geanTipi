@@ -13,6 +13,7 @@ RunAction::RunAction()
     man->CreateNtupleDColumn("x");
     man->CreateNtupleDColumn("y");
     man->CreateNtupleDColumn("z");
+    man->CreateNtupleDColumn("weight");
     man->FinishNtuple();
 }
 

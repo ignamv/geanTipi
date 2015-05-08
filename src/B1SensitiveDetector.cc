@@ -27,7 +27,8 @@ G4bool B1SensitiveDetector::ProcessHits(G4Step *step,
         G4TouchableHistory *)
 {
     B1Hit *newHit = new B1Hit(step->GetTotalEnergyDeposit(), 
-            step->GetPostStepPoint()->GetPosition());
+            step->GetPreStepPoint()->GetPosition(),
+            step->GetPreStepPoint()->GetWeight());
     fHitsCollection->insert( newHit );
     return true;
 }
@@ -47,6 +48,7 @@ void B1SensitiveDetector::EndOfEvent(G4HCofThisEvent *)
       man->FillNtupleDColumn(1, (*it)->position[0]);
       man->FillNtupleDColumn(2, (*it)->position[1]);
       man->FillNtupleDColumn(3, (*it)->position[2]);
+      man->FillNtupleDColumn(4, (*it)->weight);
       man->AddNtupleRow(); 
   }
 }
