@@ -23,7 +23,8 @@ endif()
 #
 include(${Geant4_USE_FILE})
 include_directories(${PROJECT_SOURCE_DIR}/include)
-SET(CMAKE_CXX_FLAGS "-std=c++0x")
+#SET(CMAKE_CXX_FLAGS "-std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -std=c++0x")
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
